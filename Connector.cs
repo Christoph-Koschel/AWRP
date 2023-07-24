@@ -126,7 +126,7 @@ RequireNewInstance = True";
             return true;
         }
 
-        public bool SolutionExists(string solutionUniqueName) { 
+        private bool SolutionExists(string solutionUniqueName) { 
             QueryByAttribute qba = new QueryByAttribute("solution");
             qba.AddAttributeValue("uniquename", solutionUniqueName);
             EntityCollection res = client.RetrieveMultiple(qba);
