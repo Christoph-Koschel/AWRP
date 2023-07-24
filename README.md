@@ -36,6 +36,7 @@ COMMANDS
             -f <file>
             The file relative to the config file that should be uploaded
 
+    push
         Upload all tracked files to your environment
 
     help
