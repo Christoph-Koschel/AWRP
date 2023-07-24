@@ -114,7 +114,7 @@ RequireNewInstance = True";
                 CreateRequest req = new CreateRequest() {
                     Target = entity
                 };
-                req.Parameters.Add("SolutionUniqueName", "TypeScriptAnpassung");
+                req.Parameters.Add("SolutionUniqueName", solutionUniqueName);
 
                 Console.WriteLine("WebResource dont exists... Automatically create one");
                 client.Execute(req);
