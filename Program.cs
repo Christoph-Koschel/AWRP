@@ -105,6 +105,23 @@ namespace AWRP {
 
                 return Add(file, description, prefix, solution);
             }
+            if (task == "remove") {
+                string file = null;
+
+                for (uint i = 0; i < args.Length; i++) {
+                    if (args[i] == "-f") {
+                        if (i + 1 >= args.Length) {break;}
+                        file = args[++i];
+                    }
+                }
+
+                if (file == null) {
+                    Console.WriteLine("Missing parameter '-f <file>'");
+                    return 1;
+                }
+
+                return Remove(file);
+            }
 
             {  
                 Assembly asm = Assembly.GetEntryAssembly();
@@ -183,6 +200,7 @@ namespace AWRP {
                 }
             } else {
                 Console.WriteLine("Nothing is initilized use the 'init' commnad");
+                return 1;
             }
             
             return 0;
@@ -202,6 +220,9 @@ namespace AWRP {
                     return 1;
                 }
 
+                file = file.Replace('\\', '/');
+                file = file.StartsWith("./") ? file.Substring(2) : file;
+
                 Config.UploadItem item = new Config.UploadItem() {
                     Src = file,
                     ResoucrePath = prefix ?? config.Prefix,
@@ -214,8 +235,46 @@ namespace AWRP {
                 Console.WriteLine($"Added '{file}' to upload list");
             } else {
                 Console.WriteLine("Nothing is initilized use the 'init' command");
+                return 1;
             }
             
+            return 0;
+        }
+
+        private static int Remove(string file) {
+            if (File.Exists(CONFIG_PATH)) {
+                if (!Config.Load(CONFIG_PATH, out Config config)) {
+                    Console.WriteLine("ERROR: Could not load config file. Please re-init the project");
+                    return 1;
+                }
+
+                int toRemove = -1;
+
+                file = file.Replace('\\', '/');
+                file = file.StartsWith("./") ? file.Substring(2) : file;
+
+                for (int i = 0; i < config.Uploads.Count; i++)
+                {
+                    if (config.Uploads[i].Src == file) {
+                        toRemove = i;
+                        break;
+                    }
+                }
+
+                if (toRemove != -1) {
+                    Console.WriteLine($"Successfully removed '{file}'");
+                    config.Uploads.RemoveAt(toRemove);
+
+                    Config.Write(CONFIG_PATH, config);
+                } else {
+                    Console.WriteLine($"Could not find file '{file}' in your config");
+                    return 1;
+                }
+            } else {
+                Console.WriteLine("Nothing is initilized use the 'init' command");
+                return 1;
+            }
+
             return 0;
         }
     }
