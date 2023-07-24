@@ -1,0 +1,5 @@
+.vsc
+bin
+obj
+test
+./*.json

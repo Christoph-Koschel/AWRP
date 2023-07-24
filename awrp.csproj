@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net4.6.2</TargetFramework>
+    <Version>1.0.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Author>Christoph Koschel</Author>
+    <Product>awrp</Product>
+    <Description>Automatic WebRessource publisher</Description>
+    <Copyright>Copyright (c) 2023 Christoph Koschel</Copyright>
+    <RootNamespace>AWRP</RootNamespace>
+    <AssemblyName>awrp</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.PowerPlatform.Dataverse.Client" Version="1.1.12" />
+  </ItemGroup>
+</Project>
