@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace AWRP {
     internal class Config {
-        internal const string CONFIG_NAME = "awr.json";
+        internal const string CONFIG_NAME = "awrp.json";
         internal const string PASSWORD_NULL = "__NULL__";
 
         internal static bool Load(string path, out Config config) {
